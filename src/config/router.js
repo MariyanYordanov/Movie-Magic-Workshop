@@ -4,4 +4,4 @@ const router = Router();
 
 // TO DO
 
-module.exports = router;
+module.exports = { router };
