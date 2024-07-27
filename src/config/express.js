@@ -5,4 +5,4 @@ function expressConfig(app) {
     app.use('/static',staticHandler('static'));
 };
 
-module.exports = expressConfig;
+module.exports = { expressConfig };
