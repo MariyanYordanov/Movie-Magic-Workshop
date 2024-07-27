@@ -11,4 +11,4 @@ function hbsConfig(app) {
   app.set('view engine', 'hbs');
 };
 
-module.exports = hbsConfig;
+module.exports = {hbsConfig};

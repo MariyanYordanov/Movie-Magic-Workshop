@@ -5,4 +5,4 @@ function expressConfig(app) {
   app.set('view engine', 'ejs');
 }
 
-module.exports = expressConfig;
+module.exports = {expressConfig};
