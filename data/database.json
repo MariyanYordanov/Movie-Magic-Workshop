@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "title": "Jungle Cuise",
+        "genre": "Adventure",
+        "director": "Jaume Collet-Serra",
+        "year": 2021,
+        "imageURL": "../images/jungle-cruise.jpg",
+        "rating": 6.7,
+        "description": "Dreaming about saving countless lives and having another adventure, the feisty English feminist and doctor of botany, Dr Lily Houghton, embarks on a peril-laden mission to change the world. Along with her fashionable brother, MacGregor, Dr Houghton enlists the help of the arrogant, wisecracking riverboat skipper,Captain Frank Wolff, to guide them through the serpentine Amazon River in La Quila, his swift wooden boat. Now, as the intrepid trio ventures deeper and deeper into the heart of an impenetrable green maze, searching for something that cannot be found, a centuries-old curse and the ruthless aristocrat, Prince Joachim, threaten to put an end to their ambitious plans"
+    },
+    {
+        "id": 2,
+        "title": "The Little Mermaid",
+        "genre": "Family",
+        "director": "Rob Marshall",
+        "year": 2023,
+        "imageURL": "../images/the-little-mermaid.jpg",
+        "rating": 0,
+        "description": "A young mermaid gives up her life in the sea to love a human prince."
+    },
+    {
+        "id": 3,
+        "title": "Home Alone",
+        "genre": "Comedy",
+        "director": "Chris Columbus",
+        "year": 1990,
+        "imageURL": "../images/home-alone.jpg",
+        "rating": 7.6,
+        "description": "An eight-year-old troublemaker must protect his house from a pair of burglars when he is accidentally left home alone by his family during Christmas vacation."
+    }
+]
