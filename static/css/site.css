@@ -19,7 +19,7 @@ main {
 }
 
 body {
-    background-color: #FFB4A2;
+    background-color: #f0f0f0;
     background-position: 20% 82%;
     backdrop-filter: blur(4px);
     background-repeat: no-repeat;
@@ -38,7 +38,7 @@ body {
 
 nav,
 footer {
-    background-color: #B5838D;
+    background-color: #4d6d72;
     width: 100%;
     display: flex;
     font-size: 1.5rem;
@@ -87,9 +87,8 @@ nav h1 {
 
 nav a {
     text-decoration: none;
-    border-radius: 50%;
     padding: 0.5em;
-    color: black;
+    color: white;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -103,9 +102,9 @@ nav>img {
 nav a:hover {
     font-weight: normal;
     height: 30px;
-    border-radius: 10%;
     font-weight: bold;
-    background-color: #FFB4A2;
+    color: whitesmoke;
+    box-shadow: inset 0 -1px 0 0 whitesmoke;
 }
 
 footer {
@@ -114,7 +113,7 @@ footer {
     height: 40px;
     font-size: 20px;
     width: 100%;
-    color: black;
+    color: whitesmoke;
     font-weight: bold;
     padding: 0.7em 1em;
 }

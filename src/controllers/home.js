@@ -1,5 +1,5 @@
 module.exports = {
-    homeController: (req, res) => {
+    home: (req, res) => {
         res.render('home', {title: 'Home Page'});
     }
 };

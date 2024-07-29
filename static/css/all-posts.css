@@ -14,7 +14,7 @@
   font-size: 4rem;
   text-transform: capitalize;
   font-family: Georgia, serif;
-  color: black;
+  color: #5b848a;
   font-weight: bold;
   font-family: Ubuntu, sans-serif !important;
 }
@@ -35,7 +35,7 @@
   flex-wrap: wrap;
   justify-content: space-around;
   box-shadow: 0 0px 81px #5b848a;
-  background-color: #6D6875;
+  background-color: #f0f0f0;
   padding-top: 20px;
   padding-bottom: 20px;
   margin-left: 1.5em;
@@ -102,7 +102,7 @@
 .flip > .front,
 .flip > .back {
   display: block;
-  color: black;
+  color: whitesmoke;
   font-weight: bold;
   width: inherit;
   background-size: cover !important;
@@ -110,14 +110,14 @@
   height: 450px;
   width: 350px;
   padding: 1em 1em;
-  background: #FFB4A2;
+  background: #5b848a;
   border-radius: 10px;
 }
 
 .flip > .back > h2 {
   font-size: 1.5rem;
   padding-top: 5px;
-  color: grey;
+  color: whitesmoke;
 }
 
 .flip > .back > p {
@@ -125,7 +125,7 @@
   padding-top: 20px;
   line-height: 180%;
   margin-bottom: 4em;
-  color: black;
+  color: whitesmoke;
 }
 
 img > .text-shadow {
@@ -142,14 +142,14 @@ img > .text-shadow {
 }
 
 .details {
-  color: #fff;
+  color: #5b848a;
   border: none;
   padding: 15px;
   outline: none;
   font-size: 18px;
   margin-top: 30px;
   margin-left: 10px;
-  background: #B5838D;
+  background: whitesmoke;
   border-radius: 12px;
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -169,7 +169,7 @@ img > .text-shadow {
   height: 100px;
   display: block;
   flex-wrap: wrap;
-  background-color: #FFB4A2;
+  background-color: #f0f0f0;
   padding-top: 20px;
   padding-bottom: 20px;
   margin-left: 1em;
