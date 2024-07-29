@@ -162,6 +162,8 @@ img > .text-shadow {
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);
+  outline: 8px auto rgba(58, 97, 124, 0.6);
+  border-radius: 2rem;
 }
 
 .no-posts {
