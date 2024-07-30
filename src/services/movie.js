@@ -1,12 +1,12 @@
-const fs = require('fs');
+const fs = require('fs/promises');
 const Movie = require('../models/Movie');
 
-const filePath = './data/movies.json';
+const filePath = './data/database.json';
 
 async function readFileAsync() {
-    
+
     try {
-        const data = await fs.promises.readFile(filePath, 'utf-8');
+        const data = await fs.readFile(filePath, 'utf-8');
         return JSON.parse(data.toString());
     } catch (err) {
         console.error(err);
@@ -16,7 +16,7 @@ async function readFileAsync() {
 
 async function writeFileAsync(data) {
 
-    await fs.promises.writeFile(filePath, JSON.stringify(data));
+    await fs.writeFile(filePath, JSON.stringify(data));
 };
 
 async function toMovieModel(data) {
@@ -39,7 +39,7 @@ async function getAllMovies() {
 
     const movies = await readFileAsync();
 
-    return movies.map(toMovieModel);
+    return movies.map(x => toMovieModel(x));
 }
 
 async function getMovieById(id) {
