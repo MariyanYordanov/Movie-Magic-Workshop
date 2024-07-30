@@ -1,5 +1,5 @@
 const fs = require('fs/promises');
-const Movie = require('../models/Movie');
+const Movie  = require('../models/Movie');
 
 const filePath = './data/database.json';
 
@@ -38,8 +38,8 @@ async function toMovieModel(data) {
 async function getAllMovies() {
 
     const movies = await readFileAsync();
-
-    return movies.map(x => toMovieModel(x));
+    movies.map(x => toMovieModel(x));
+    return movies;
 }
 
 async function getMovieById(id) {
