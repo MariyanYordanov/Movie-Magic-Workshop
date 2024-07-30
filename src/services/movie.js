@@ -84,5 +84,5 @@ module.exports = {
     getMovieById,
     writeFileAsync,
     readFileAsync,
-    createMovie
+    createMovie,
 };

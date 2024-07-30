@@ -6,7 +6,7 @@ module.exports = {
     },
     createPost: async (req, res) => {
         const movie = await createMovie(req.body);
-        res.redirect(`/details/${movie.id}`);
+        res.redirect('/details/' + movie.id);
     }
     // TODO edit and delete
 };
