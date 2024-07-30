@@ -11,7 +11,7 @@ module.exports = {
         const movie = await getMovieById(id);
 
         if(!movie){
-            res.render('404', {title: 'Page Not Found'});
+            res.render('404', {title: 'Movie Not Found'});
             return;
         }
 
