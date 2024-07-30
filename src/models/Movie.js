@@ -9,4 +9,4 @@ class Movie {
     description;
 }       
 
-module.exports = Movie;
+module.exports = { Movie };
