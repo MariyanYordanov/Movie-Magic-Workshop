@@ -4,12 +4,17 @@ const Movie = require('../models/Movie');
 const filePath = './data/movies.json';
 
 async function readFileAsync() {
-    const data = await fs.readFile(filePath);
-    return JSON.parse(data.toString());
-};
+    try {
+        const data = await fs.promises.readFile(filePath, 'utf-8');
+        return JSON.parse(data);
+    } catch (err) {
+        console.error(err);
+        return [];
+    }
+}
 
 async function writeFileAsync(data) {
-    await fs.writeFile(filePath, JSON.stringify(data));
+    await fs.promises.writeFile(filePath, JSON.stringify(data));
 };
 
 async function toMovieModel(data) {
@@ -35,10 +40,8 @@ async function getAllMovies() {
 async function getMovieById(id) {
     const movies= await readFileAsync();
     const movie = movies.find(x => x.id === id);
-    if(!movie){
-        return undefined;
-    }
-    return toMovieModel(movie);
+    
+    return movie ? toMovieModel(movie) : movie;
 }
 
 module.exports = { 
