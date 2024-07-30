@@ -44,7 +44,7 @@ async function getAllMovies() {
 
 async function getMovieById(id) {
 
-    const movies= await readFileAsync();
+    const movies = await readFileAsync();
     const movie = movies.find(x => x.id === id);
     
     return movie ? toMovieModel(movie) : movie;
