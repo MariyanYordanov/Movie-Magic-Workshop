@@ -5,10 +5,8 @@ module.exports = {
         res.render('create', {title: 'Create Page'});
     },
     createPost: async (req, res) => {
-        
-        const movie = req.body;
-        const result = await createMovie(movie);
-
-        res.redirect('/', '301');
+        const movie = await createMovie(req.body);
+        res.redirect(`/details/${movie.id}`);
     }
+    // TODO edit and delete
 };
