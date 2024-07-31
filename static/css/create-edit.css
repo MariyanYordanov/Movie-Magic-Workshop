@@ -1,6 +1,6 @@
 .createSection,
 .editSection {
-  background-color: #b5838d;
+  background-color: #4d6d72;
   margin: auto;
   width: 740px;
   height: 950px;
@@ -8,7 +8,7 @@
   left: 35%;
   text-align: center;
   display: flex;
-  color: black;
+  color: whitesmoke;
   font-weight: bold;
   box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, 0.5);
 }

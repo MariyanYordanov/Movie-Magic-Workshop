@@ -116,15 +116,17 @@ footer {
 }
 
 .error-container {
-    position: fixed;
-    right: 5em;
+    position: absolute;
+    left: 45%;
     min-width: 80px;
     display: block;
     z-index: 11111;
-    top: 13%;
+    top: 70px;
     text-align: center;
     border-radius: 0.5rem;
-    color: rgb(255, 255, 255);
+    color: red;
+    background: #22333B;
+    font-size: 18px;
     font-style: italic;
     font-weight: bold;
     height: auto;
@@ -133,31 +135,32 @@ footer {
 }
 
 .error-container>p {
-    background: #22333B;
-    font-size: 18px;
     padding: 10px;
     height: auto;
 }
 
 .error-container {
-    -moz-animation: cssAnimation 0s ease-in 2s forwards;
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
     /* Firefox */
-    -webkit-animation: cssAnimation 0s ease-in 2s forwards;
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
     /* Safari and Chrome */
-    -o-animation: cssAnimation 0s ease-in 2s forwards;
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
     /* Opera */
-    animation: cssAnimation 0s ease-in 2s forwards;
+    animation: cssAnimation 0s ease-in 5s forwards;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
-.error {
-    background: #22333B;
-    color: red;
+.error input.inputFields, .error textarea.inputFields{
+    border-color: red;
     font-size: 18px;
-    padding: 10px;
-    height: auto;
+    font-weight: bold;
 }
+
+.error label {
+    color: red !important;
+}
+
 @keyframes cssAnimation {
     to {
         width: 0;
