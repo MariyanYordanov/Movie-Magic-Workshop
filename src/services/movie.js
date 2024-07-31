@@ -1,14 +1,17 @@
 const fs = require('fs/promises');
-const { Movie }  = require('../models/Movie');
+const { Movie } = require('../models/Movie');
 
 const filePath = './data/database.json';
 
 async function readFileAsync() {
 
     try {
+
         const data = await fs.readFile(filePath, 'utf-8');
         return JSON.parse(data.toString());
+
     } catch (err) {
+
         console.error(err);
         return [];
     }
@@ -38,8 +41,9 @@ async function toMovieModel(data) {
 async function getAllMovies() {
 
     const movies = await readFileAsync();
-    movies.map(x => toMovieModel(x));
-    return movies;
+    const movieModels = movies.map(x => toMovieModel(x).join(''));
+
+    return movieModels; 
 }
 
 async function getMovieById(id) {
@@ -79,10 +83,22 @@ async function uuid() {
     });
 }
 
+async function searchAsync(title, genre, year) {
+    
+    const allMovies = await readFileAsync();
+
+    const filteredMovies = allMovies.filter(x => 
+        x.title.toLowerCase().includes(title.toLowerCase()) ||
+        x.genre.toLowerCase().includes(genre.toLowerCase()) ||
+        x.year.toString().includes(year.toString())
+    );
+    
+    return filteredMovies.map(x => toMovieModel(x).join(''));
+}
+
 module.exports = { 
     getAllMovies,
     getMovieById,
-    writeFileAsync,
-    readFileAsync,
     createMovie,
+    searchAsync
 };
