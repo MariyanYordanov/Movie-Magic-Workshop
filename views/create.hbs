@@ -6,6 +6,9 @@
 
         <form method="post" class="createForm">
             <h2>Add Movie</h2>
+            {{#if errors}}
+            <p class="error">All field are required!</p>
+            {{/if}}
             <ul class="noBullet">
                 <li>
                     <label for="title">Title:</label>
@@ -20,11 +23,11 @@
                     <input type="text" class="inputFields" id="director" name="director" value="{{director}}" />
                 </li>
                 <li>
-                    <label for="year">Year:</label>
+                    <label for="date">Year:</label>
                     <input type="number" class="inputFields" id="date" name="year" value="{{year}}" />
                 </li>
                 <li>
-                    <label for="imageURL">Movie Poster:</label>
+                    <label >Movie Poster:</label>
                     <input type="text" class="inputFields" id="image" name="imageURL" value="{{imageURL}}" />
                 </li>
                 <li>

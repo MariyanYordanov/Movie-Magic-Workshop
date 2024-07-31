@@ -151,6 +151,13 @@ footer {
     animation-fill-mode: forwards;
 }
 
+.error {
+    background: #22333B;
+    color: red;
+    font-size: 18px;
+    padding: 10px;
+    height: auto;
+}
 @keyframes cssAnimation {
     to {
         width: 0;
