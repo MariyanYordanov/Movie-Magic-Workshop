@@ -1,67 +1,30 @@
-const fs = require("fs/promises");
+const mongoose = require("mongoose");
 const { Movie } = require("../models/Movie");
 
-const filePath = "./data/database.json";
-
-async function readFileAsync() {
-  try {
-    const data = await fs.readFile(filePath, "utf-8");
-    return JSON.parse(data.toString());
-  } catch (err) {
-    console.error(err);
-    return [];
-  }
-}
-
-async function writeFileAsync(data) {
-  await fs.writeFile(filePath, JSON.stringify(data));
-}
-
-async function toMovieModel(data) {
-  const movie = new Movie();
-
-  movie.id = data.id;
-  movie.title = data.title;
-  movie.genre = data.genre;
-  movie.director = data.director;
-  movie.year = data.year;
-  movie.imageURL = data.imageURL;
-  movie.rating = data.rating;
-  movie.description = data.description;
-
-  return movie;
-}
-
 async function getAllMovies() {
-  const allMovies = await readFileAsync();
-  return allMovies; 
+  const movies = await Movie.find().lean();
+  return movies;
 }
 
 async function getMovieById(id) {
-  const movies = await readFileAsync();
-  const movie = movies.find((x) => x.id == id);
-
-  return movie ? toMovieModel(movie) : movie;
+  const movie = await Movie.findOne({ _id: id }).populate("cast").lean();
+  return movie;
 }
 
 async function createMovie(data) {
   const movie = new Movie();
-  const id = await uuid();
 
-  movie.id = id;
   movie.title = data.title;
   movie.genre = data.genre;
   movie.director = data.director;
   movie.year = data.year;
-  movie.imageURL = data.imageURL;
+  movie.imageURL = data.imageURL || '/img/logo.png';
   movie.rating = data.rating;
   movie.description = data.description;
+  movie.cast = data.cast || [];
 
-  const movies = await readFileAsync();
-  movies.push(movie);
-  await writeFileAsync(movies);
-
-  return toMovieModel(movie);
+  await movie.save();
+  return movie;
 }
 
 async function uuid() {
@@ -73,7 +36,7 @@ async function uuid() {
 }
 
 async function searchAsync(title, genre, year) {
-  const movies = await readFileAsync();
+  const movies = await getAllMovies();
   let result = movies;
 
   if (title) {
