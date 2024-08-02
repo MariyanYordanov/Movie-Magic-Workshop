@@ -1,4 +1,4 @@
-#search{
+#search {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,7 +58,7 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #718F94;
+  background-color: #6c6c7b;
   cursor: pointer;
 }
 
@@ -70,6 +70,7 @@ input[type=submit]:hover {
 }
 
 button {
+  align-self: center;
   background-color: #545775;
   border: none;
   padding: 8px;
