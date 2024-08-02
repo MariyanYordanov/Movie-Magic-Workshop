@@ -13,7 +13,7 @@ router.get('/details/:id', details);
 router.get('/create', createGet);
 router.post('/create', createPost);
 router.get('/search', search);
-router.get('/cast', castGet);
+router.get('/cast-create', castGet);
 
 router.all('*', notFound);
 

@@ -1,14 +1,14 @@
 module.exports  = {
     castGet: (req, res) => {
-        res.render('cast', { title: 'Create Cast Page' });
+        res.render('cast-create', { title: 'Create Cast Page' });
     },
     castPost: async (req, res) => {
-        const { name, character } = req.body;
-        if (!name || !character) {
-            res.render('cast', { title: 'Create Cast Page', errors: { name: !name, character: !character }, cast: req.body });
+        const { name, characterName } = req.body;
+        if (!name || !characterName) {
+            res.render('cast-create', { title: 'Create Cast Page', errors: { name: !name, characterName: !characterName }, cast: req.body });
             return;
         }
         const cast = await createCast(req.body);
-        res.redirect('/cast');
+        res.redirect('/cast-create');
     }
 }

@@ -10,7 +10,8 @@
                     </div>
                     <div class="second-info">
                         <p class="card-year">Year: {{movie.year}}</p>
-                        <p class="card-ranking">Rating: {{movie.ranking}}<span id="stars">&#x2605; &#x2605; &#x2605; &#x2605;</span></p>
+                        <p class="card-ranking">Rating: {{movie.ranking}}<span id="stars">&#x2605; &#x2605; &#x2605;
+                                &#x2605;</span></p>
                     </div>
                 </div>
                 <p class="disc">Description: {{movie.description}}</p>
@@ -18,6 +19,18 @@
         </div>
         <div class="card_right">
             <img src="{{movie.imageURL}}" alt="{{movie.title}}">
+        </div>
+    </div>
+    <div class="cast-card">
+        <div class="card-img">
+            <img src="{{cast.imageURL}}"
+                alt="cast">
+        </div>
+        <div class="cast-info">
+            <h1>{{cast.name}}</h1>
+            <h3>Age: {{cast.age}}</h3>
+            <h3>Born: {{cast.born}}</h3>
+            <h3>Name in Movie: {{cast.charecterName}}</h3>
         </div>
     </div>
 </section>
