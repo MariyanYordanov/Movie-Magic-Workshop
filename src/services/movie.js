@@ -34,7 +34,7 @@ async function toMovieModel(data) {
 
 async function getAllMovies() {
   const allMovies = await readFileAsync();
-  return allMovies; 
+  return allMovies.map(toMovieModel); 
 }
 
 async function getMovieById(id) {
