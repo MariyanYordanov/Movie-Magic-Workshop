@@ -34,7 +34,7 @@ async function toMovieModel(data) {
 
 async function getAllMovies() {
   const allMovies = await readFileAsync();
-  return allMovies.map(toMovieModel); 
+  return allMovies; 
 }
 
 async function getMovieById(id) {
@@ -88,7 +88,7 @@ async function searchAsync(title, genre, year) {
     result = result.filter((x) => x.year == year);
   }
 
-  return result.map(toMovieModel);
+  return result;
 }
 
 module.exports = {
