@@ -54,9 +54,20 @@ async function searchAsync(title, genre, year) {
   return result;
 }
 
+async function createCast(data) {
+  const cast = new Cast();
+
+  cast.name = data.name;
+  cast.character = data.character;
+
+  await cast.save();
+  return cast;
+}
+
 module.exports = {
   getAllMovies,
   getMovieById,
   createMovie,
   searchAsync,
+  createCast,
 };

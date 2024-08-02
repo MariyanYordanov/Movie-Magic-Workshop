@@ -3,6 +3,7 @@ const { home, details, search } = require('../controllers/catalog');
 const { about } = require('../controllers/about');
 const { createGet, createPost } = require('../controllers/movie');
 const { notFound } = require('../controllers/404');
+const { castGet } = require('../controllers/cast');
 
 const router = Router();
 
@@ -12,6 +13,7 @@ router.get('/details/:id', details);
 router.get('/create', createGet);
 router.post('/create', createPost);
 router.get('/search', search);
+router.get('/cast', castGet);
 
 router.all('*', notFound);
 
