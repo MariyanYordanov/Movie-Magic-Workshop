@@ -1,4 +1,4 @@
-const { getAllMovies, getMovieById } = require('../services/movie');
+const { getAllMovies, getMovieById, searchAsync } = require('../services/movie');
 
 module.exports = {
     home: async (req, res) => {
@@ -25,6 +25,13 @@ module.exports = {
         }
     },
     search: async (req, res) => {
-        res.render('search', { title: 'Search Page' });
+        const { title, genre ,year } = req.query;
+        if (!title && !genre && !year) {
+            res.render('search', { title: 'Non-Query Page' });
+            return;
+        }
+        const movies = await searchAsync( title, genre, year);
+        console.log(movies);
+        res.render('search', { movies, title: 'Search Page' });
     }
 }

@@ -6,7 +6,6 @@ const { router } = require('./config/routes');
 const app = express();
 const port = process.env.port || 3000;
 
-
 expressConfig(app);
 hbsConfig(app);
 

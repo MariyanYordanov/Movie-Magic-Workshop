@@ -1,14 +1,9 @@
-#search {
-  display: block;
-  justify-content: space-around;
+#search{
+  display: flex;
+  justify-content: center;
   align-items: center;
-  bottom: 0;
-  margin-top: 1em;
-  margin-left: 0%;
-  margin-right: 0%;
-  min-height: 150px;
-  font-size: 20px;
-  width: 100%;
+  flex-direction: column;
+  margin-top: 2em;
 }
 
 #search > h1 {
@@ -37,25 +32,12 @@ input[type=text],
 input[type=number],
 select,
 textarea {
-  width: 100%;
   display: inline-block;
   border: 1px solid black;
   box-sizing: border-box;
   padding: 12px 20px 12px 12px;
   border-radius: 0 4px 4px 4px;
   margin: 8px 0 2em;
-}
-
-input.year {
-  width: 10%;
-}
-
-input.search {
-  width: 20%;
-}
-
-input.genre {
-  width: 20%;
 }
 
 input[type=submit] {
@@ -84,5 +66,22 @@ input[type=submit]:hover {
   border-radius: 5px;
   padding: 20px;
   width: 70%;
-  margin-left: 25%;
+  margin: auto;
+}
+
+button {
+  background-color: #545775;
+  border: none;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  width: 25%;
+  margin: 5px;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 4px;
+  letter-spacing: 2px;
+  border: 1px solid black;
 }

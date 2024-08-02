@@ -34,8 +34,8 @@ async function toMovieModel(data) {
 
 async function getAllMovies() {
   const allMovies = await readFileAsync();
-  const movies = allMovies.map((x) => toMovieModel(x));
-  return movies;
+  const movies = allMovies.map(toMovieModel);
+  return movies; 
 }
 
 async function getMovieById(id) {
@@ -73,20 +73,23 @@ async function uuid() {
   });
 }
 
-async function searchAsync(query) {
+async function searchAsync(title, genre, year) {
   const movies = await readFileAsync();
-  const url = new URLSearchParams(query);
-  const title = url.get("title");
-  const genre = url.get("genre");
-  const year = url.get("year");
+  let result = movies;
 
-  const result = movies.filter(
-    (x) =>
-      x.title.includes(title) ||
-      x.genre.includes(genre) ||
-      x.year.includes(year)
-  );
-  return result.map((x) => toMovieModel(x));
+  if (title) {
+    result = result.filter((x) => x.title.toLowerCase().includes(title.toLowerCase()));
+  }
+
+  if (genre) {
+    result = result.filter((x) => x.genre.toLowerCase().includes(genre.toLowerCase()));
+  }
+
+  if (year) {
+    result = result.filter((x) => x.year == year);
+  }
+
+  return result.map(toMovieModel);
 }
 
 module.exports = {
