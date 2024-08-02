@@ -22,7 +22,12 @@ const movieSchema = new Schema({
         min: 1900,
         max: new Date().getFullYear()
     },
-    imageURL: String,
+    imageURL: {
+        type: String,
+        required: true,
+        default: '/img/logo.png',
+        validate: /^https?/
+    },
     rating: {
         type: Number,
         required: true,

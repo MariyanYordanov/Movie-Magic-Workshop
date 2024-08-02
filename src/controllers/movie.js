@@ -22,7 +22,7 @@ module.exports = {
         }
 
         const movie = await createMovie(req.body);
-        res.redirect('/details/' + movie._id);
+        res.redirect('/details/' + req.body._id);
     }
     // TODO edit and delete
 };

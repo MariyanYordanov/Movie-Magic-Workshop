@@ -22,7 +22,12 @@ const castSchema = new Schema({
         required: true,
         maxlength: 50
     },
-    imageURL: String,
+    imageURL: {
+        type: String,
+        required: true,
+        default: '/img/logo.png',
+        validate: /^https?/
+    },
     movie: [{
         type: Types.ObjectId,
         ref: 'Movie'
