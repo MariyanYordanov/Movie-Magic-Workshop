@@ -11,15 +11,26 @@ module.exports  = {
             age: !req.body.age,
             born: !req.body.born,
             imageURL: !req.body.imageURL,
-            movie: !req.body.movie,
         };
 
         if(Object.values(errors).includes(true)){
             res.render('cast-create', {title: 'Create Error Page', errors, cast: req.body});
             return;
         }
+        try {
+            const cast = await createCast(req.body);
 
-        const cast = await createCast(req.body);
-        res.redirect('/');
+            // Логиране на върнатия обект за отстраняване на грешки
+            console.log('Created movie:', cast);
+
+            if (!cast || !caast._id) {
+                throw new Error('Movie creation failed or missing _id');
+            }
+
+            res.redirect('/details/' + cast._id);
+        } catch (error) {
+            console.error('Error creating movie:', error);
+            res.status(500).send('Internal Server Error');
+        }
     }
 };

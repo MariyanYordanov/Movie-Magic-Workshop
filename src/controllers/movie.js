@@ -5,7 +5,6 @@ module.exports = {
         res.render('create', {title: 'Create Page'});
     },
     createPost: async (req, res) => {
-
         const errors = {
             title: !req.body.title,
             genre: !req.body.genre,
@@ -20,7 +19,7 @@ module.exports = {
             res.render('create', {title: 'Create Error Page', errors, movie: req.body});
             return;
         }
-
+        
         const movie = await createMovie(req.body);
         res.redirect('/details/' + req.body._id);
     }
