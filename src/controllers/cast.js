@@ -5,12 +5,21 @@ module.exports  = {
         res.render('cast-create', { title: 'Create Cast Page' });
     },
     castPost: async (req, res) => {
-        const { name, characterName } = req.body;
-        if (!name || !characterName) {
-            res.render('cast-create', { title: 'Non-Data Page', errors: { name: !name, characterName: !characterName }, cast: req.body });
+        const errors = {
+            name: !req.body.name,
+            characterName: !req.body.characterName,
+            age: !req.body.age,
+            born: !req.body.born,
+            imageURL: !req.body.imageURL,
+            movie: !req.body.movie,
+        };
+
+        if(Object.values(errors).includes(true)){
+            res.render('cast-create', {title: 'Create Error Page', errors, cast: req.body});
             return;
         }
+
         const cast = await createCast(req.body);
-        res.redirect('/cast-create', { title: 'Create Cast Page', cast });
+        res.redirect('/');
     }
 };
