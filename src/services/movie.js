@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Movie } = require("../models/Movie");
+const { Cast } = require("../models/Cast");
 
 async function getAllMovies() {
     const movies = await Movie.find().lean();
@@ -55,6 +56,9 @@ async function createCast(data) {
 
     cast.name = data.name;
     cast.character = data.character;
+    cast.age = data.age;
+    cast.born = data.born;
+    cast.imageURL = data.imageURL;
 
     await cast.save();
     return cast;

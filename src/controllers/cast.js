@@ -23,7 +23,7 @@ module.exports  = {
             // Логиране на върнатия обект за отстраняване на грешки
             console.log('Created movie:', cast);
 
-            if (!cast || !caast._id) {
+            if (!cast || !cast._id) {
                 throw new Error('Movie creation failed or missing _id');
             }
 
