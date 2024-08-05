@@ -21,16 +21,9 @@
             <img src="{{movie.imageURL}}" alt="{{movie.title}}">
         </div>
     </div>
-    <div class="cast-card">
-        <div class="card-img">
-            <img src="{{cast.imageURL}}"
-                alt="cast">
-        </div>
-        <div class="cast-info">
-            <h1>{{cast.name}}</h1>
-            <h3>Age: {{cast.age}}</h3>
-            <h3>Born: {{cast.born}}</h3>
-            <h3>Name in Movie: {{cast.charecterName}}</h3>
-        </div>
+    <div class="main-cast-card">
+        {{#each cast}}
+        {{> cast}}
+        {{/each}}
     </div>
 </section>

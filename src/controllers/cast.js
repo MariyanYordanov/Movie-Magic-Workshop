@@ -1,4 +1,4 @@
-const { createCast, getCastById } = require('../services/cast');
+const { createCast } = require('../services/cast');
 
 module.exports  = {
     castGet: (req, res) => {

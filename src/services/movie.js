@@ -69,5 +69,5 @@ module.exports = {
     getMovieById,
     createMovie,
     searchAsync,
-    createCast,
+    createCast
 };
