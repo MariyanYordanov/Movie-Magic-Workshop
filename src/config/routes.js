@@ -16,6 +16,7 @@ router.get('/search', search);
 router.get('/cast-create', castGet);
 router.post('/cast-create', castPost);
 
+router.get('*', notFound);
 router.all('*', notFound);
 
 module.exports = { router };

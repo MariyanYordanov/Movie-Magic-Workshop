@@ -1,13 +1,13 @@
 const { Cast } = require("../models/Cast");
+const mongoose = require("mongoose");
 
 async function createCast(data) {
     const cast = new Cast({
         name: data.name,
         age: data.age,
         born: data.born,
-        character: data.characterName,
-        mageURL: data.imageURL || "/img/logo.png",
-        movie: data.movie || [],
+        nameInMovie: data.nameInMovie,
+        imageURL: data.imageURL,
     });
 
     await cast.save();

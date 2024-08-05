@@ -17,7 +17,7 @@ const castSchema = new Schema({
         required: true,
         maxlength: 50
     },
-    charecterName: {
+    nameInMovie: {
         type: String,
         required: true,
         maxlength: 50
@@ -26,7 +26,7 @@ const castSchema = new Schema({
         type: String,
         required: true,
         default: '/img/logo.png',
-        validate: /^https?/
+        validate: /^http?/
     },
     movie: [{
         type: Types.ObjectId,
