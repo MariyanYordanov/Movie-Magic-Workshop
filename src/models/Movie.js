@@ -25,8 +25,8 @@ const movieSchema = new Schema({
     imageURL: {
         type: String,
         required: true,
-        default: 'http://localhost:3000/src/static/img/logo.webp',
-        validate: /^http?/
+        default: 'https://localhost:3000/src/static/img/logo.webp',
+        validate: /^https?/
     },
     rating: {
         type: Number,

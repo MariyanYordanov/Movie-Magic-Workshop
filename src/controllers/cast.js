@@ -19,7 +19,6 @@ module.exports  = {
         }
         try {
             const cast = await createCast(req.body);
-
             res.redirect('/');
         } catch (error) {
             console.error('Error creating movie:', error);
