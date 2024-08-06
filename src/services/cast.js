@@ -20,30 +20,28 @@ async function getCastByIdAsync(id) {
     return cast;
 }
 
-
 async function attachCast(movieId, castId) {
 
     const movie = await Movie.findOne().where("_id").equals(movieId);
 
-    if (!movie || !cast) {
-        return false;
+    if (!movie) {
+        throw new Error("Movie not found");
     }
 
     if(movie.cast.includes(castId)){
-        return false;
-
+        throw new Error("Cast already attached");
     }
 
     const cast = await Cast.findOne().where("_id").equals(castId);
 
     if (!cast) {
-        return false;
+        throw new Error("Cast not found");
     }
 
     movie.cast.push(cast);
     await movie.save();
     
-    return true;
+    return movie;
 };
 
 async function getAllCasts(){

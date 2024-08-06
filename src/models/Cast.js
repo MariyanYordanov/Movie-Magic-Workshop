@@ -26,7 +26,7 @@ const castSchema = new Schema({
         type: String,
         required: true,
         default: '/img/logo.png',
-        validate: /^https?/
+        //validate: /^https?/
     },
     movie: [{
         type: Types.ObjectId,
