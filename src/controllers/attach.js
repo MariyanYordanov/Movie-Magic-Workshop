@@ -7,44 +7,39 @@ module.exports = {
         const id = req.params.id;
         console.log(id);
         const movie = await getMovieById(id);
-
-        if(!movie) {
-            res.render('404');
-            return;
-        }
-
+            if (!movie) {
+                res.status(404).render('404', { title: 'Movie Not Found' });
+                return;
+            }
         const allCasts = await getAllCasts();
-
-        console.log(allCasts);
-
         res.render('cast-attach', {movie, allCasts, title: 'Attach Cast'});
     },
     attachPost: async (req, res) => {
-        const movieId = req.params._id;
-        const castId = req.body.cast._id;
+    //     const movieId = req.params._id;
+    //     const castId = req.body.cast._id;
 
-        const movie = await getMovieById(movieId);
+    //     const movie = await getMovieById(movieId);
 
-        if (!movie) {
-            res.render('404');
-            return;
-        }
+    //     if (!movie) {
+    //         res.render('404');
+    //         return;
+    //     }
 
-        if (movie.cast.includes(castId)) {
-            res.render('404');
-            return;
-        }
+    //     if (movie.cast.includes(castId)) {
+    //         res.render('404');
+    //         return;
+    //     }
 
-        const cast = await getCastByIdAsync(castId);
+    //     const cast = await getCastByIdAsync(castId);
 
-        if (!cast) {
-            res.render('404');
-            return;
-        }
+    //     if (!cast) {
+    //         res.render('404');
+    //         return;
+    //     }
 
-        movie.cast.push(cast);
-        await movie.save();
+    //     movie.cast.push(cast);
+    //     await movie.save();
 
-        res.redirect(`/details/${movieId}`);
+    //     res.redirect(`/details/${movieId}`);
     }
 };

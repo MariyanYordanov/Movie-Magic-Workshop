@@ -16,8 +16,8 @@ router.post('/create', createPost);
 router.get('/search', search);
 router.get('/cast-create', castGet);
 router.post('/cast-create', castPost);
-router.get('/cast-attach', attachGet);
-router.post('/cast-attach', attachPost);
+router.get('/attach/:id', attachGet);
+router.post('/attach/:id', attachPost);
 
 router.get('*', notFound);
 router.all('*', notFound);
