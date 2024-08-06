@@ -46,4 +46,9 @@ async function attachCast(movieId, castId) {
     return true;
 };
 
-module.exports = { createCast, getCastByIdAsync, attachCast};
+async function getAllCasts(){
+    const casts = await Cast.find().lean();
+    return casts;
+}
+
+module.exports = { createCast, getCastByIdAsync, attachCast, getAllCasts };

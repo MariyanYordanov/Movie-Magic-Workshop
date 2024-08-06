@@ -18,12 +18,11 @@ async function createMovie(data) {
     movie.title = data.title;
     movie.genre = data.genre;
     movie.director = data.director;
-    movie.year = data.year;
+    movie.year = Number(data.year);
     movie.imageURL = data.imageURL;
-    movie.rating = data.rating;
+    movie.rating = Number(data.rating);
     movie.description = data.description;
-    movie.cast = [];
-
+    
     await movie.save();
     return movie;
 }

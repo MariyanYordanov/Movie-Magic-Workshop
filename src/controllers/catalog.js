@@ -11,7 +11,7 @@ module.exports = {
         }
     },
     details: async (req, res) => {
-        const id = req.body._id;
+        const id = req.params.id;
         console.log(id);
         try {
             const movie = await getMovieById(id);
