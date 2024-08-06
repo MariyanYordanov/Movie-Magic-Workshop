@@ -1,5 +1,6 @@
 const { getCastByIdAsync, getAllCasts} = require('../services/cast');
 const { getMovieById } = require('../services/movie');
+const movie = require('./movie');
 
 module.exports = {
     attachGet: async (req, res) => {
@@ -15,15 +16,24 @@ module.exports = {
         res.render('cast-attach', {movie, allCasts, title: 'Attach Cast'});
     },
     attachPost: async (req, res) => {
-    //     const movieId = req.params._id;
-    //     const castId = req.body.cast._id;
+        const movieId = req.params.id;
+        const castId = req.body.cast;
 
-    //     const movie = await getMovieById(movieId);
+        if(!movieId || !castId){
+            res.status(400, 'Bad Request').end();
+            return;
+        }
 
-    //     if (!movie) {
-    //         res.render('404');
-    //         return;
-    //     }
+        const movie = await getMovieById(movieId);
+
+        if(castId === 'none'){
+            const allCasts = await getAllCasts();
+            res.render('cast-attach',  {movie, allCasts, error: true, title: 'None Cast'});
+            return;
+        }
+
+        
+
 
     //     if (movie.cast.includes(castId)) {
     //         res.render('404');
