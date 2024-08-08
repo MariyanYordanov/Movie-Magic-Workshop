@@ -3,6 +3,7 @@ const { getAllMovies, getMovieById, searchAsync } = require('../services/movie')
 module.exports = {
     home: async (req, res) => {
         try {
+            res.setHeader('Set-Cookie', 'token=1234; HttpOnly');
             const movies = await getAllMovies();
             res.render('home', { movies, title: 'Home Page' });
         } catch (error) {
