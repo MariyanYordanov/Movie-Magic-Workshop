@@ -1,20 +1,23 @@
 const bct = require('bcryptjs');
 const { Schema, model } = require('mongoose');
 
-const userSchema = new Schema({
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    collation: { locale: 
-        {
-            type: String,   
-            default: 'en_US'
-        }, 
-        strength: {
-            type: String,
-            default: 2
-        } 
+const userSchema = new Schema(
+    {
+        email: { 
+            type: String, required: true, unique: true 
+        },
+        password: { 
+            type: String, required: true 
+        },
+    },
+    {
+        collation: {
+            locale: 'en_US',
+            strength: 1,
+        },
+        timestamps: true,
     }
-});
+);
 
 userSchema.pre('save', async function(next) {
     if (this.isModified('password')) {
