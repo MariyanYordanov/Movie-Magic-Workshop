@@ -1,3 +1,5 @@
+const { register, login } = require("../services/user");
+
 module.exports = {
     registerGet: (req, res) => {
         res.render("register", { title: "Register Page" });
@@ -12,7 +14,8 @@ module.exports = {
             if (password != repass) {
                 throw new Error("Passwords don't match!");
             }
-            res.redirect("/register");
+            await register(email, password);
+            res.redirect("/");
         } catch (err) {
             res.render("register", {
                 title: "Register Page",
@@ -21,8 +24,6 @@ module.exports = {
             });
             return;
         }
-
-        res.redirect("/register");
     },
     loginGet: (req, res) => {
         res.render("login", { title: "Login Page" });
