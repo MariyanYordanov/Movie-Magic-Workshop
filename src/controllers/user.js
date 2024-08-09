@@ -1,14 +1,31 @@
 module.exports = {
     registerGet: (req, res) => {
-        res.render('register', { title: 'Register Page' });
+        res.render("register", { title: "Register Page" });
     },
     registerPost: async (req, res) => {
         const { email, password, repass } = req.body;
         console.log(email, password, repass);
-        res.redirect('/register');
+        try {
+            if (!password || !email) {
+                throw new Error("All fields are required!");
+            }
+            if (password != repass) {
+                throw new Error("Passwords don't match!");
+            }
+            res.redirect("/register");
+        } catch (err) {
+            res.render("register", {
+                title: "Register Page",
+                error: err.message,
+                data: { email },
+            });
+            return;
+        }
+
+        res.redirect("/register");
     },
     loginGet: (req, res) => {
-        res.render('login', { title: 'Login Page' });
+        res.render("login", { title: "Login Page" });
     },
     loginPost: async (req, res) => {
         const { email, password } = req.body;
@@ -16,8 +33,8 @@ module.exports = {
             const user = await login(email, password);
             res.status(200).send(user);
         } catch (error) {
-            console.error('Error during user login:', error);
+            console.error("Error during user login:", error);
             res.status(400).send(error.message);
         }
-    }
+    },
 };
