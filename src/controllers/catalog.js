@@ -2,13 +2,8 @@ const { getAllMovies, getMovieById, searchAsync } = require('../services/movie')
 
 module.exports = {
     home: async (req, res) => {
-        try {
-            const movies = await getAllMovies();
-            res.render('home', { movies, title: 'Home Page' });
-        } catch (error) {
-            console.error('Error during fetching home page movies:', error);
-            res.status(500).send('Internal Server Error');
-        }
+        const movies = await getAllMovies();
+        res.render('home', { movies, title: 'Home Page' });
     },
     details: async (req, res) => {
         const id = req.params.id;
