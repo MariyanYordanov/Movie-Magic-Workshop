@@ -19,10 +19,10 @@ router.get('/cast-create', castGet);
 router.post('/cast-create', castPost);
 router.get('/attach/:id', attachGet);
 router.post('/attach/:id', attachPost);
-router.get('/user', registerGet);
-router.post('/user', registerPost);
-router.get('/user', loginGet);
-router.post('/user', loginPost);
+router.get('/register', registerGet);
+router.post('/register', registerPost);
+router.get('/login', loginGet);
+router.post('/login', loginPost);
 
 
 router.get('*', notFound);
