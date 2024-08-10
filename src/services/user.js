@@ -1,7 +1,7 @@
 const { User } = require('../models/User');
 const bcr = require('bcryptjs');
 
-async function register(email, password) {
+async function register(email, pass) {
     // check if user exists -> throw error if true
     // hash password
     // create DB record
@@ -9,12 +9,12 @@ async function register(email, password) {
 
     const existing = await User.findOne({ email });
     if (existing) {
-        throw new Error('Username is taken');
+        throw new Error('Email is taken already');
     }
 
     const user = new User({
         email,
-        password: await bcr.hash(password, 10)
+        password: await bcr.hash(pass, 10)
     });
 
     await user.save();
