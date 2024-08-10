@@ -25,7 +25,6 @@ const movieSchema = new Schema({
     imageURL: {
         type: String,
         required: true,
-        default: 'https://localhost:3000/src/static/img/logo.webp',
         //validate: /^https?/
     },
     rating: {
@@ -41,7 +40,11 @@ const movieSchema = new Schema({
     cast: [{
         type: Types.ObjectId,
         ref: 'Cast'
-    }]
+    }],
+    creator: {
+        type: Types.ObjectId,
+        ref: 'User'
+    }
 });   
 
 const Movie = model('Movie', movieSchema);
