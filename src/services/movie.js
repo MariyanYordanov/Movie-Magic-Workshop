@@ -13,17 +13,16 @@ async function getMovieById(id) {
 }
 
 async function createMovie(creatorId,data) {
-    const movie = new Movie();
-
-    movie.title = data.title;
-    movie.genre = data.genre;
-    movie.director = data.director;
-    movie.year = Number(data.year);
-    movie.imageURL = data.imageURL;
-    movie.rating = Number(data.rating);
-    movie.description = data.description;
-    movie.creator = creatorId;
-    
+    const movie = new Movie({
+        title: data.title,
+        genre: data.genre,
+        director: data.director,
+        year: Number(data.year),
+        imageURL: data.imageURL,
+        rating: Number(data.rating),
+        description: data.description,
+        creator: creatorId,
+    });
     await movie.save();
     return movie;
 }

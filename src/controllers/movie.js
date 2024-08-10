@@ -5,6 +5,8 @@ module.exports = {
         res.render("create", { title: "Create Page" });
     },
     createPost: async (req, res) => {
+        const creatorId = req.user._id; 
+        // guard clause
         const errors = {
             title: !req.body.title,
             genre: !req.body.genre,
@@ -25,7 +27,7 @@ module.exports = {
         }
 
         try {
-            const movie = await createMovie(req.user._id, req.body);
+            const movie = await createMovie(creatorId, req.body);
             res.redirect("/details/" + movie._id);
         } catch (err) {
             res.render("create", {
