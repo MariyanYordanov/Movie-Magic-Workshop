@@ -15,11 +15,13 @@
                     </div>
                 </div>
                 <p class="disc">Description: {{description}}</p>
+                {{#if isCreator}}
                 <div class="details-btn">
                     <a id="edit-button" href="#">Edit</a>
                     <a id="delete-button" href="#">Delete</a>
-                    <a id="attach-button" href="/attach/{{_id}}">Attach Cast</a>
+                    <a id="delete-button" href="/attach/{{_id}}">Attach Cast</a>
                 </div>
+                {{/if}}
             </div>
         </div>
         <div class="card_right">

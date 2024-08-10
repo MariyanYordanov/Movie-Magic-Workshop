@@ -7,18 +7,13 @@ module.exports = {
     },
     details: async (req, res) => {
         const id = req.params.id;
-        
         const movie = await getMovieById(id);
-            if (!movie) {
-                res.status(404).render('404', { title: 'Movie Not Found' });
-                return;
-            }
-            const isCreator = req.user && req.user._id == movie.creator;
-            console.log(req.user._id);
-            console.log(movie.creator);
-            console.log(req.user);
-            console.log(isCreator);
-            res.render('details', { movie, isCreator, title: 'Details Page' });
+        if (!movie) {
+            res.status(404).render('404', { title: 'Movie Not Found' });
+            return;
+        }
+        movie.isCreator = req.user && req.user._id == movie.creator;
+        res.render('details', { movie });
     },
     search: async (req, res) => {
         const { title, genre ,year } = req.query;
