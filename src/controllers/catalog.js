@@ -12,7 +12,9 @@ module.exports = {
             res.status(404).render('404', { title: 'Movie Not Found' });
             return;
         }
-        movie.isCreator = req.user && req.user._id == movie.creator;
+        movie.isCreator = req.user?._id == movie.creator;
+        console.log(movie.creator);
+        console.log(movie.isCreator);
         res.render('details', { movie });
     },
     search: async (req, res) => {

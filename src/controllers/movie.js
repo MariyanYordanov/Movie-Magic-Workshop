@@ -25,7 +25,7 @@ module.exports = {
         }
 
         try {
-            const movie = await createMovie(req.body);
+            const movie = await createMovie(req.user._id, req.body);
             res.redirect("/details/" + movie._id);
         } catch (err) {
             res.render("create", {

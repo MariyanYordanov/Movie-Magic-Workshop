@@ -12,7 +12,7 @@ async function getMovieById(id) {
     return movie;
 }
 
-async function createMovie(data) {
+async function createMovie(creatorId,data) {
     const movie = new Movie();
 
     movie.title = data.title;
@@ -22,6 +22,7 @@ async function createMovie(data) {
     movie.imageURL = data.imageURL;
     movie.rating = Number(data.rating);
     movie.description = data.description;
+    movie.creator = creatorId;
     
     await movie.save();
     return movie;
