@@ -28,12 +28,12 @@ async function login(email, password) {
     
     const user = await User.findOne({ email });
     if (!user) {
-        throw new Error('Invalid email');
+        throw new Error('Invalid email or password');
     }
 
     const match = await bcr.compare(password, user.password);
     if (!match) {
-        throw new Error('Invalid password');
+        throw new Error('Invalid email or password');
     }
 
     return user;
