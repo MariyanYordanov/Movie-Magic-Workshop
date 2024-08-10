@@ -1,4 +1,7 @@
 const { Router } = require('express');
+
+const { isGuest, isUser } = require('../middlewares/guards');
+
 const { home, details, search } = require('../controllers/catalog');
 const { about } = require('../controllers/about');
 const { createGet, createPost } = require('../controllers/movie');
@@ -12,17 +15,19 @@ const router = Router();
 router.get('/', home);
 router.get('/about', about);
 router.get('/details/:id', details);
-router.get('/create', createGet);
-router.post('/create', createPost);
 router.get('/search', search);
-router.get('/cast-create', castGet);
-router.post('/cast-create', castPost);
-router.get('/attach/:id', attachGet);
-router.post('/attach/:id', attachPost);
-router.get('/register', registerGet);
-router.post('/register', registerPost);
-router.get('/login', loginGet);
-router.post('/login', loginPost);
+
+router.get('/create', isUser, createGet);
+router.post('/create', isUser, createPost);
+router.get('/cast-create', isUser, castGet);
+router.post('/cast-create', isUser, castPost);
+router.get('/attach/:id', isUser, attachGet);
+router.post('/attach/:id', isUser, attachPost);
+
+router.get('/register', isGuest, registerGet);
+router.post('/register', isGuest, registerPost);
+router.get('/login', isGuest, loginGet);
+router.post('/login', isGuest, loginPost);
 router.get('/logout', logout);
 
 

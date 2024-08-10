@@ -13,8 +13,6 @@ module.exports = {
             return;
         }
         movie.isCreator = req.user?._id == movie.creator;
-        console.log(movie.creator);
-        console.log(movie.isCreator);
         res.render('details', { movie });
     },
     search: async (req, res) => {
