@@ -17,8 +17,8 @@
                 <p class="disc">Description: {{description}}</p>
                 {{#if isCreator}}
                 <div class="details-btn">
-                    <a id="edit-button" href="#">Edit</a>
-                    <a id="delete-button" href="#">Delete</a>
+                    <a id="edit-button" href="/edit/{{_id}}">Edit</a>
+                    <a id="delete-button" href="/delete/{{_id}}">Delete</a>
                     <a id="delete-button" href="/attach/{{_id}}">Attach Cast</a>
                 </div>
                 {{/if}}

@@ -4,7 +4,7 @@ const { isGuest, isUser } = require('../middlewares/guards');
 
 const { home, details, search } = require('../controllers/catalog');
 const { about } = require('../controllers/about');
-const { createGet, createPost } = require('../controllers/movie');
+const { createGet, createPost, editGet, editPost } = require('../controllers/movie');
 const { notFound } = require('../controllers/404');
 const { castGet, castPost } = require('../controllers/cast');
 const { attachGet, attachPost } = require('../controllers/attach');
@@ -23,6 +23,8 @@ router.get('/cast-create', isUser, castGet);
 router.post('/cast-create', isUser, castPost);
 router.get('/attach/:id', isUser, attachGet);
 router.post('/attach/:id', isUser, attachPost);
+router.get('/edit/:id', isUser, editGet);
+router.post('/edit/:id', isUser, editPost);
 
 router.get('/register', isGuest, registerGet);
 router.post('/register', isGuest, registerPost);

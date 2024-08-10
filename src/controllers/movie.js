@@ -39,4 +39,11 @@ module.exports = {
         }
     },
     // TODO edit and delete
+    editGet: (req, res) => {
+        
+        res.render("edit", { title: "Edit Page" });
+    },
+    editPost: (req, res) => {
+        res.render("edit", { title: "Edit Page" });
+    },
 };
