@@ -1,4 +1,4 @@
-const { createMovie } = require("../services/movie");
+const { createMovie, getMovieById } = require("../services/movie");
 
 module.exports = {
     createGet: (req, res) => {
@@ -39,9 +39,23 @@ module.exports = {
         }
     },
     // TODO edit and delete
-    editGet: (req, res) => {
-        
-        res.render("edit", { title: "Edit Page" });
+    editGet: async (req, res) => {
+
+        const movieId = req.params.id;
+
+        const movie = await getMovieById(movieId);
+        if(!movie){
+            res.render('404', {title: 'Not Found Movie'})
+            return;
+        }
+
+        const isCreator = req.user._id == movie.creator.toString();
+        if(!isCreator){
+            res.redirect('/login');
+            return;
+        }
+
+        res.render("edit", { movie });
     },
     editPost: (req, res) => {
         res.render("edit", { title: "Edit Page" });
