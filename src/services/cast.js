@@ -20,9 +20,13 @@ async function getCastByIdAsync(id) {
     return cast;
 }
 
-async function attachCast(movieId, castId) {
+async function attachCast(movieId, castId, userId) {
+    
+    const movie = await Movie.findById(movieId);
 
-    const movie = await Movie.findOne().where("_id").equals(movieId);
+    if(userId != movie.creator.toString()){
+        throw new Error('Access denied');
+    }
 
     if (!movie) {
         throw new Error("Movie not found");

@@ -1,0 +1,48 @@
+
+<section id="edit-page">
+    <div class="editSection">
+        <div class="info-edit">
+            <h2>"One ring to rule them all, one ring to find them, one ring to bring them all and in the darkness bind
+                them."</h2>
+        </div>
+
+        <form method="post" class="editForm">
+            <h2>Delete Movie</h2>
+            <ul class="noBullet">
+                <li>
+                    <label for="title">Title:</label>
+                    <input type="text" class="inputFields" id="title" name="title" value="{{movie.title}} disabled"/>
+                </li>
+                <li>
+                    <label for="genre">Genre:</label>
+                    <input type="text" class="inputFields" id="genre" name="genre" value="{{movie.genre}} disabled" />
+                </li>
+                <li>
+                    <label for="director">Director:</label>
+                    <input type="text" class="inputFields" id="director" name="director" value="{{movie.director}} disabled" />
+                </li>
+                <li>
+                    <label for="date">Year:</label>
+                    <input type="number" class="inputFields" id="date" name="year" value="{{movie.year}} disabled" />
+                </li>
+                <li>
+                    <label >Movie Poster:</label>
+                    <input type="text" class="inputFields" id="image" name="imageURL" value="{{movie.imageURL}} disabled" />
+                </li>
+                <li>
+                    <label for="rating">Rating:</label>
+                    <input type="number" step="0.01" class="inputFields" id="rating" name="rating" value="{{movie.rating}} disabled" />
+                </li>
+                <li>
+                    <label for="description">Description:</label>
+                    <textarea id="description" class="inputFields" name="description">{{movie.description}} disabled</textarea>
+                </li>
+                <li id="center-btn">
+                    <button id="delete-button">Confirm deletion</button>
+                    <a href="/details/{{movie._id}}" style="font-size: large; border: solid 1px black; padding: 10px;">Cancel</a>
+                </li>
+            </ul>
+        </form>
+
+    </div>
+</section>

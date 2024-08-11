@@ -96,4 +96,31 @@ module.exports = {
         }
         res.redirect('/details/' + movieId);
     },
+    deleteGet: async (req, res) => {
+
+
+        const movieId = req.params.id;
+        let movie;
+
+        try{
+            movie = await getMovieById(movieId);
+            if(!movie){
+                throw new Error('Movie not found');
+            }
+        } catch {
+            res.render('404')
+            return;
+        }
+
+        const isCreator = req.user._id == movie.creator.toString();
+        if(!isCreator){
+            res.redirect('/login');
+            return;
+        }
+
+        res.render('delete', { movie });
+    },
+    deletePost: (req, res) => {
+
+    }
 };
