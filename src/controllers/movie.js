@@ -1,4 +1,4 @@
-const { createMovie, getMovieById, updateMovie } = require("../services/movie");
+const { createMovie, getMovieById, updateMovie, deleteMovie } = require("../services/movie");
 
 module.exports = {
     createGet: (req, res) => {
@@ -120,7 +120,20 @@ module.exports = {
 
         res.render('delete', { movie });
     },
-    deletePost: (req, res) => {
+    deletePost: async (req, res) => {
+        const movieId = req.params.id;
+        const creatorId = req.user._id;
 
+        try{
+            await deleteMovie(movieId, creatorId);
+        } catch (err) {
+            if(err.message == 'Access denied'){
+                res.redirect('/login');
+            } else {
+                res.render('404');
+            }
+        }
+
+        return res.redirect('/');
     }
 };

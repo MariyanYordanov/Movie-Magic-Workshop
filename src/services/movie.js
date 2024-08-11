@@ -17,9 +17,9 @@ async function createMovie(creatorId, data) {
         title: data.title,
         genre: data.genre,
         director: data.director,
-        year: Number(data.year),
+        year: data.year,
         imageURL: data.imageURL,
-        rating: Number(data.rating),
+        rating: data.rating,
         description: data.description,
         creator: creatorId,
     });
@@ -77,7 +77,7 @@ async function updateMovie(movieId, movieData, userId){
     movie.title = movieData.title;
     movie.genre = movieData.genre;
     movie.director = movieData.director;
-    movie.year = Number(movieData.year);
+    movie.year = movieData.year;
     movie.imageURL = movieData.imageURL;
     movie.rating = movieData.rating;
     movie.description = movieData.description;
@@ -87,16 +87,15 @@ async function updateMovie(movieId, movieData, userId){
 
 async function deleteMovie(movieId, userId) {
     const movie = await Movie.findById(movieId);
-
+    if (!movie) {
+        throw new Error("Movie not found");
+    }
+    
     if(userId != movie.creator.toString()){
         throw new Error('Access denied');
     }
 
-    if (!movie) {
-        throw new Error("Movie not found");
-    }
-
-    await Movie.deleteById(movieId);
+    await Movie.findByIdAndDelete(movieId);
 }
 
 module.exports = {
