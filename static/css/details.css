@@ -92,8 +92,8 @@
   margin-top: 2em;
 }
 
-.social-btn>.edit-btn,
-.del-btn,
+.social-btn>.edit-button,
+.delete-button,
 .vote-up,
 .thanks-for-vote {
   color: black;
@@ -113,11 +113,11 @@
   transition: 200ms ease-in-out;
 }
 
-.del-btn {
+.delete-button {
   background-color: #C6AC8F;
 }
 
-.edit-btn {
+.edit-button{
   background-color: #C6AC8F;
 }
 
@@ -131,8 +131,8 @@
   background-color: #EAE0D5;
 }
 
-.edit-btn:hover,
-.del-btn:hover,
+.edit-button:hover,
+.delete-button:hover,
 .vote-up:hover,
 .vote-down:hover {
   -webkit-transform: scale(1.1);
@@ -350,8 +350,8 @@ span {
   margin-top: 2em;
 }
 
-.social-btn > .edit-btn,
-.del-btn {
+.social-btn > .edit-button,
+.delete-button {
   color: black;
   font-weight: bold;
   border: none;
@@ -369,16 +369,16 @@ span {
   transition: 200ms ease-in-out;
 }
 
-.del-btn {
+.delete-button {
   background-color: #c6ac8f;
 }
 
-.edit-btn {
+.edit-button {
   background-color: #c6ac8f;
 }
 
-.edit-btn:hover,
-.del-btn:hover {
+.edit-button:hover,
+.delete-button:hover {
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);

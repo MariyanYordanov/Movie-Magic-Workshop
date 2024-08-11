@@ -1,4 +1,4 @@
-const { createMovie, getMovieById } = require("../services/movie");
+const { createMovie, getMovieById, updateMovie } = require("../services/movie");
 
 module.exports = {
     createGet: (req, res) => {
@@ -42,10 +42,15 @@ module.exports = {
     editGet: async (req, res) => {
 
         const movieId = req.params.id;
+        let movie;
 
-        const movie = await getMovieById(movieId);
-        if(!movie){
-            res.render('404', {title: 'Not Found Movie'})
+        try{
+            movie = await getMovieById(movieId);
+            if(!movie){
+                throw new Error('Movie not found');
+            }
+        } catch {
+            res.render('404')
             return;
         }
 
@@ -57,7 +62,30 @@ module.exports = {
 
         res.render("edit", { movie });
     },
-    editPost: (req, res) => {
-        res.render("edit", { title: "Edit Page" });
+    editPost: async (req, res) => {
+        const movieId = req.params.id;
+        const isCreator = req.user._id;
+
+        const errors = {
+            title: !req.body.title,
+            genre: !req.body.genre,
+            director: !req.body.director,
+            year: !req.body.year,
+            imageURL: !req.body.imageURL,
+            rating: !req.body.rating,
+            description: !req.body.description,
+        };
+       
+        if (Object.values(errors).includes(true)) {
+            res.render('edit', {
+                title: 'Edit Error Page',
+                errors,
+                movie: req.body,
+            });
+            return;
+        }
+
+        await updateMovie(movieId, req.body, isCreator);
+        res.redirect('/details/' + movieId);
     },
 };

@@ -13,24 +13,27 @@
                         <p class="card-year">Year: {{year}}</p>
                         <p class="card-ranking">Rating: {{rating}}</p>
                     </div>
+
+                    <p class="disc">Description: {{description}}</p>
+                    {{#if isCreator}}
+                    <div class="details-btn">
+                        <a id="edit-button" href="/edit/{{_id}}">Edit</a>
+                        <a id="delete-button" href="/delete/{{_id}}">Delete</a>
+                        <a id="delete-button" href="/attach/{{_id}}">Attach Cast</a>
+                    </div>
+                    {{/if}}
                 </div>
-                <p class="disc">Description: {{description}}</p>
-                {{#if isCreator}}
-                <div class="details-btn">
-                    <a id="edit-button" href="/edit/{{_id}}">Edit</a>
-                    <a id="delete-button" href="/delete/{{_id}}">Delete</a>
-                    <a id="delete-button" href="/attach/{{_id}}">Attach Cast</a>
-                </div>
-                {{/if}}
             </div>
         </div>
         <div class="card_right">
-            <img src="{{imageURL}}" alt="{{title}}">
-        </div>
-        <div class="main-cast-card">
-            {{#each cast}}
-            {{> cast}}
-            {{/each}}
+            <div class="card_right_img">
+                <img src="{{imageURL}}" alt="{{title}}">
+            </div>
+            <div class="main-cast-card">
+                {{#each cast}}
+                {{> cast}}
+                {{/each}}
+            </div>
         </div>
     </div>
 

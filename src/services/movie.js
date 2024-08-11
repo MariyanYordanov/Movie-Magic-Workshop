@@ -12,7 +12,7 @@ async function getMovieById(id) {
     return movie;
 }
 
-async function createMovie(creatorId,data) {
+async function createMovie(creatorId, data) {
     const movie = new Movie({
         title: data.title,
         genre: data.genre,
@@ -63,10 +63,33 @@ async function createCast(data) {
     return cast;
 }
 
+async function updateMovie(movieId, movieData, creatorId){
+
+    const movie = await Movie.findById(movieId);
+    if(!movie){
+        throw new Error(`Movie ${movieId} not found`);
+    }
+
+    if(movie.creator.toString() != creatorId){
+        throw new Error('Access denied');
+    }
+
+    movie.title = movieData.title;
+    movie.genre = movieData.genre;
+    movie.director = movieData.director;
+    movie.year = Number(movieData.year);
+    movie.imageURL = movieData.imageURL;
+    movie.rating = movieData.rating;
+    movie.description = movieData.description;
+
+    await movie.save();
+}
+
 module.exports = {
     getAllMovies,
     getMovieById,
     createMovie,
     searchAsync,
-    createCast
+    createCast,
+    updateMovie
 };
