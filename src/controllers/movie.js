@@ -84,8 +84,16 @@ module.exports = {
             });
             return;
         }
-
-        await updateMovie(movieId, req.body, isCreator);
+        try{
+            await updateMovie(movieId, req.body, isCreator);
+        } catch (err) {
+            if(err.message == 'Access denied'){
+                res.redirect('/404');
+            } else {
+                res.render('404');
+            }
+            return;
+        }
         res.redirect('/details/' + movieId);
     },
 };

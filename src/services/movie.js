@@ -63,14 +63,14 @@ async function createCast(data) {
     return cast;
 }
 
-async function updateMovie(movieId, movieData, creatorId){
+async function updateMovie(movieId, movieData, userId){
 
     const movie = await Movie.findById(movieId);
     if(!movie){
         throw new Error(`Movie ${movieId} not found`);
     }
 
-    if(movie.creator.toString() != creatorId){
+    if(movie.creator.toString() != userId){
         throw new Error('Access denied');
     }
 
