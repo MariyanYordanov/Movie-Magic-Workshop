@@ -50,7 +50,6 @@ userRouter.post(
 
             res.redirect("/");
         } catch (err) {
-            console.log(err);
             return res.render("register", {
                 title: "Error Register Page",
                 errors: err.errors,
