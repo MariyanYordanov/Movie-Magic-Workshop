@@ -6,7 +6,7 @@ module.exports = {
     },
     createPost: async (req, res) => {
         const creatorId = req.user._id; 
-        // guard clause
+
         const errors = {
             title: !req.body.title,
             genre: !req.body.genre,
@@ -20,25 +20,22 @@ module.exports = {
         if (Object.values(errors).includes(true)) {
             res.render("create", {
                 title: "Create Error Page",
-                errors,
-                movie: req.body,
+                errors
             });
             return;
         }
 
         try {
+
             const movie = await createMovie(creatorId, req.body);
             res.redirect("/details/" + movie._id);
+            
         } catch (err) {
-            res.render("create", {
-                title: "Create Error Page",
-                errors,
-                movie: req.body,
-            });
+
+            res.render("create", { errors: { message: err.message } });
             return;
         }
     },
-    // TODO edit and delete
     editGet: async (req, res) => {
 
         const movieId = req.params.id;

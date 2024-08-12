@@ -1,3 +1,4 @@
+const express = require("express"); 
 const mongoose = require("mongoose");
 const { Movie } = require("../models/Movie");
 const { Cast } = require("../models/Cast");
@@ -13,17 +14,23 @@ async function getMovieById(id) {
 }
 
 async function createMovie(creatorId, data) {
-    const movie = new Movie({
-        title: data.title,
-        genre: data.genre,
-        director: data.director,
-        year: data.year,
-        imageURL: data.imageURL,
-        rating: data.rating,
-        description: data.description,
-        creator: creatorId,
-    });
-    await movie.save();
+    const movie = new Movie();
+
+    movie.title = data.title;
+    movie.genre = data.genre;
+    movie.director = data.director;
+    movie.year = data.year;
+    movie.imageURL = data.imageURL;
+    movie.rating = data.rating;
+    movie.description = data.description;
+    movie.creator = creatorId;
+
+    try {
+        movie.save();
+    } catch (err) {
+        throw new Error(err.message);
+    }
+
     return movie;
 }
 
