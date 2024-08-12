@@ -3,6 +3,7 @@ const { body, validationResult } = require("express-validator");
 const { createToken } = require("../services/token");
 const { register, login } = require("../services/user");
 const { isGuest } = require("../middlewares/guards");
+const { parseError } = require("../util");  
 
 const userRouter = Router();
 
@@ -36,11 +37,7 @@ userRouter.post(
             const result = validationResult(req);
 
             if(result.errors.length) {
-
-                const err = new Error('Input validation error');
-                err.errors = Object.fromEntries(result.errors.map(e => [ e.path, e.msg ]));
-                
-                throw err;
+                throw result.errors;
             }
 
             const user = await register(email, password);
@@ -52,7 +49,7 @@ userRouter.post(
         } catch (err) {
             return res.render("register", {
                 title: "Error Register Page",
-                errors: err.errors,
+                errors: parseError(err).errors,
                 data: { email},
             });
         }
