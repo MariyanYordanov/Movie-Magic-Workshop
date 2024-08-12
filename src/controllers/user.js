@@ -15,24 +15,27 @@ userRouter.post(
     isGuest,
     body("email")
         .trim()
-        .isEmail()
+        .isEmail( { domain_specific_validation: true })
         .withMessage("Enter a valid email address!"),
+
     body("password")
         .trim()
         .isAlphanumeric()
         .isLength({ min: 6 })
         .withMessage("Password must be at least 6 characters long!"),
+
     body('repass')
         .trim()
         .custom((value, { req }) => { return value == req.body.password })
         .withMessage('Passwords do not match!'),
+
     async (req, res) => {
 
-        const { email, password} = req.body;
+        const { email, password } = req.body;
         try {
             const result = validationResult(req);
 
-            if(result.errors.length > 0) {
+            if(result.errors.length) {
 
                 const err = new Error('Input validation error');
                 err.errors = Object.fromEntries(result.errors.map(e => [ e.path, e.msg ]));
@@ -47,10 +50,11 @@ userRouter.post(
 
             res.redirect("/");
         } catch (err) {
+            console.log(err);
             return res.render("register", {
                 title: "Error Register Page",
                 errors: err.errors,
-                data: { email },
+                data: { email},
             });
         }
     }

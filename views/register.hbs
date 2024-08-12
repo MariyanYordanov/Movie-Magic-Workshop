@@ -1,8 +1,12 @@
-
+{{#if errors}}
+<div  class="error-container">
     {{#each errors}}
-        <p class="error-container">{{this}}</p>
+    
+        <p>{{this}}</p>
+       
     {{/each}}
-
+    </div> 
+{{/if}}
 <section id="register-page">
     <div class="registerSection">
         <div class="info-register">
@@ -14,7 +18,7 @@
             <ul class="noBullet">
                 <li>
                     <label for="email">Email:</label>
-                    <input type="text" class="inputFields" id="email" name="email" {{#if errors}}value="{{data.email}}"{{/if}} />
+                    <input type="text" class="inputFields" id="email" name="email" {{#if error}}value="{{data.email}}"{{/if}} />
                 </li>
                 <li>
                     <label for="password">Password:</label>
