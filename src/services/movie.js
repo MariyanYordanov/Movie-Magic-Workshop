@@ -57,19 +57,6 @@ async function searchAsync(title, genre, year) {
     return result;
 }
 
-async function createCast(data) {
-    const cast = new Cast();
-
-    cast.name = data.name;
-    cast.character = data.character;
-    cast.age = data.age;
-    cast.born = data.born;
-    cast.imageURL = data.imageURL;
-
-    await cast.save();
-    return cast;
-}
-
 async function updateMovie(movieId, movieData, userId){
 
     const movie = await Movie.findById(movieId);
@@ -110,7 +97,6 @@ module.exports = {
     getMovieById,
     createMovie,
     searchAsync,
-    createCast,
     updateMovie,
     deleteMovie
 };

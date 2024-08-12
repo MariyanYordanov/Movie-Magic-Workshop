@@ -21,6 +21,7 @@ module.exports = {
 
         const movieId = req.params.id;
         const castId = req.body.cast;
+        const creatorId = req.user._id;
 
         if(!movieId || !castId){
             res.status(400, 'Bad Request').end();
@@ -38,7 +39,7 @@ module.exports = {
         }
 
         try {
-            await attachCast(movieId, castId);
+            await attachCast(movieId, castId, creatorId);
 
         } catch (error) {
             console.log(error.message);

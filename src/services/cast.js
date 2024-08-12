@@ -24,7 +24,7 @@ async function attachCast(movieId, castId, userId) {
     
     const movie = await Movie.findById(movieId);
 
-    if(userId != movie.creator.toString()){
+    if(userId != movie.creator){
         throw new Error('Access denied');
     }
 
@@ -36,7 +36,7 @@ async function attachCast(movieId, castId, userId) {
         throw new Error("Cast already attached");
     }
 
-    const cast = await Cast.findOne().where("_id").equals(castId);
+    const cast = await Cast.findById(castId);
 
     if (!cast) {
         throw new Error("Cast not found");
