@@ -1,7 +1,5 @@
-const express = require("express"); 
-const mongoose = require("mongoose");
+
 const { Movie } = require("../models/Movie");
-const { Cast } = require("../models/Cast");
 
 async function getAllMovies() {
     const movies = await Movie.find().lean();
