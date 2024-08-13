@@ -1,5 +1,9 @@
 {{#if errors}}
-    <p class="error-container">All field are required!</p>
+<div class="error-container">
+    {{#each errors}}
+    <p class="error-container">{{this}}</p>
+    {{/each}}
+</div>
 {{/if}}
 
 <section id="create-page">

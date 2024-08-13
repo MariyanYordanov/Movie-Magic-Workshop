@@ -9,7 +9,7 @@ movieRouter.get("/create", isUser, (req, res) => {
     res.render("create", { title: "Create Page" });
 });
 
-movieRouter.post("/create", isUser, async (req, res) => {
+movieRouter.post("/create",isUser, async (req, res) => {
     const creatorId = req.user._id; 
 
     try {
@@ -23,7 +23,7 @@ movieRouter.post("/create", isUser, async (req, res) => {
     }
 });
 
-movieRouter.get("/edit/:id", async (req, res) => {
+movieRouter.get("/edit/:id", isUser, async (req, res) => {
 
     const movieId = req.params.id;
     let movie;

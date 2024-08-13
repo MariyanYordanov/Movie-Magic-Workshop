@@ -22,13 +22,8 @@ async function createMovie(creatorId, data) {
     movie.rating = data.rating;
     movie.description = data.description;
     movie.creator = creatorId;
-
-    try {
-        movie.save();
-    } catch (err) {
-        throw new Error(err.message);
-    }
-
+    
+    movie.save();
     return movie;
 }
 
