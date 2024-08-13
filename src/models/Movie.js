@@ -4,7 +4,9 @@ const movieSchema = new Schema({
     title: { 
         type: String,
         required: true,
+        minlength: 5,
         maxlength: 50,
+        match: [/^[A-Za-z0-9 ]+$/gi, 'Title must contain only English letters, digits and spaces']
     },
     genre: {
         type: String,
@@ -25,7 +27,7 @@ const movieSchema = new Schema({
     imageURL: {
         type: String,
         required: true,
-        //match: [/^https?:\/\//, 'Image URL must be a valid URL']
+        match: [/^https?:\/\/.+/, 'Image URL must start with http:// or https://']
     },
     rating: {
         type: Number,
@@ -35,6 +37,7 @@ const movieSchema = new Schema({
     },
     description: {
         type: String,
+        minlength: 10,
         required: 1000
     },
     cast: [{

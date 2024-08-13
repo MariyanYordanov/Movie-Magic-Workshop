@@ -11,9 +11,7 @@ userRouter.get("/register", isGuest, (req, res) => {
     res.render("register", { title: "Register Page" });
 });
 
-userRouter.post(
-    "/register",
-    isGuest,
+userRouter.post("/register",isGuest,
     body("email")
         .trim()
         .isEmail( { domain_specific_validation: true })
@@ -46,7 +44,9 @@ userRouter.post(
             res.cookie("token", token, { httpOnly: true });
 
             res.redirect("/");
+
         } catch (err) {
+            
             return res.render("register", {
                 title: "Error Register Page",
                 errors: parseError(err).errors,

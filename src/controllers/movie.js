@@ -1,124 +1,131 @@
+const { Router } = require("express");
+const { isUser } = require("../middlewares/guards");
+
 const { createMovie, getMovieById, updateMovie, deleteMovie } = require("../services/movie");
 
-module.exports = {
-    createGet: (req, res) => {
-        res.render("create", { title: "Create Page" });
-    },
-    createPost: async (req, res) => {
-        const creatorId = req.user._id; 
+const movieRouter = Router();
 
-        const errors = {
-            title: !req.body.title,
-            genre: !req.body.genre,
-            director: !req.body.director,
-            year: !req.body.year,
-            imageURL: !req.body.imageURL,
-            rating: !req.body.rating,
-            description: !req.body.description,
-        };
+movieRouter.get("/create", isUser, (req, res) => {
+    res.render("create", { title: "Create Page" });
+});
 
-        if (Object.values(errors).includes(true)) {
-            res.render("create", {
-                title: "Create Error Page",
-                errors
-            });
-            return;
+movieRouter.post("/create", isUser, async (req, res) => {
+    const creatorId = req.user._id; 
+
+    const errors = {
+        title: !req.body.title,
+        genre: !req.body.genre,
+        director: !req.body.director,
+        year: !req.body.year,
+        imageURL: !req.body.imageURL,
+        rating: !req.body.rating,
+        description: !req.body.description,
+    };
+
+    if (Object.values(errors).includes(true)) {
+        res.render("create", {
+            title: "Create Error Page",
+            errors
+        });
+        return;
+    }
+
+    try {
+
+        const movie = await createMovie(creatorId, req.body);
+        res.redirect("/details/" + movie._id);
+        
+    } catch (err) {
+
+        res.render("create", { errors: { message: err.message } });
+        return;
+    }
+});
+
+movieRouter.get("/edit/:id", async (req, res) => {
+
+    const movieId = req.params.id;
+    let movie;
+
+    try{
+        movie = await getMovieById(movieId);
+        if(!movie){
+            throw new Error('Movie not found');
         }
+    } catch {
+        res.render('404')
+        return;
+    }
 
-        try {
+    const isCreator = req.user._id == movie.creator.toString();
+    if(!isCreator){
+        res.redirect('/login');
+        return;
+    }
 
-            const movie = await createMovie(creatorId, req.body);
-            res.redirect("/details/" + movie._id);
-            
-        } catch (err) {
+    res.render("edit", { movie });
+});
 
-            res.render("create", { errors: { message: err.message } });
-            return;
+movieRouter.post("/edit/:id", async (req, res) => {
+    const movieId = req.params.id;
+    const isCreator = req.user._id;
+
+    const errors = {
+        title: !req.body.title,
+        genre: !req.body.genre,
+        director: !req.body.director,
+        year: !req.body.year,
+        imageURL: !req.body.imageURL,
+        rating: !req.body.rating,
+        description: !req.body.description,
+    };
+   
+    if (Object.values(errors).includes(true)) {
+        res.render('edit', {
+            title: 'Edit Error Page',
+            errors,
+            movie: req.body,
+        });
+        return;
+    }
+    try{
+        await updateMovie(movieId, req.body, isCreator);
+    } catch (err) {
+        if(err.message == 'Access denied'){
+            res.redirect('/404');
+        } else {
+            res.render('404');
         }
-    },
-    editGet: async (req, res) => {
+        return;
+    }
+    res.redirect('/details/' + movieId);
+});
 
-        const movieId = req.params.id;
-        let movie;
+movieRouter.get("/delete/:id", async (req, res) => {
+    const movieId = req.params.id;
+    let movie;
 
-        try{
-            movie = await getMovieById(movieId);
-            if(!movie){
-                throw new Error('Movie not found');
-            }
-        } catch {
-            res.render('404')
-            return;
+    try{
+        movie = await getMovieById(movieId);
+        if(!movie){
+            throw new Error('Movie not found');
         }
+    } catch {
+        res.render('404')
+        return;
+    }
 
-        const isCreator = req.user._id == movie.creator.toString();
-        if(!isCreator){
-            res.redirect('/login');
-            return;
-        }
+    const isCreator = req.user._id == movie.creator.toString();
+    if(!isCreator){
+        res.redirect('/login');
+        return;
+    }
 
-        res.render("edit", { movie });
-    },
-    editPost: async (req, res) => {
-        const movieId = req.params.id;
-        const isCreator = req.user._id;
+    res.render('delete', { movie });
+});
 
-        const errors = {
-            title: !req.body.title,
-            genre: !req.body.genre,
-            director: !req.body.director,
-            year: !req.body.year,
-            imageURL: !req.body.imageURL,
-            rating: !req.body.rating,
-            description: !req.body.description,
-        };
-       
-        if (Object.values(errors).includes(true)) {
-            res.render('edit', {
-                title: 'Edit Error Page',
-                errors,
-                movie: req.body,
-            });
-            return;
-        }
-        try{
-            await updateMovie(movieId, req.body, isCreator);
-        } catch (err) {
-            if(err.message == 'Access denied'){
-                res.redirect('/404');
-            } else {
-                res.render('404');
-            }
-            return;
-        }
-        res.redirect('/details/' + movieId);
-    },
-    deleteGet: async (req, res) => {
-
-
-        const movieId = req.params.id;
-        let movie;
-
-        try{
-            movie = await getMovieById(movieId);
-            if(!movie){
-                throw new Error('Movie not found');
-            }
-        } catch {
-            res.render('404')
-            return;
-        }
-
-        const isCreator = req.user._id == movie.creator.toString();
-        if(!isCreator){
-            res.redirect('/login');
-            return;
-        }
-
-        res.render('delete', { movie });
-    },
-    deletePost: async (req, res) => {
-        const movieId = req.params.id;
+movieRouter.post("/delete/:id", async (req, res) => {
+    const movieId = req.params.id;
         const creatorId = req.user._id;
 
         try{
@@ -133,4 +140,6 @@ module.exports = {
 
         return res.redirect('/');
     }
-};
+);
+
+module.exports = { movieRouter };
