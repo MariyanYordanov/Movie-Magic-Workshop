@@ -24,6 +24,4 @@ function parseError(err){
     return err;
 }
 
-module.exports = {
-    parseError,
-};
+module.exports = { parseError };

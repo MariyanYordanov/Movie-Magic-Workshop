@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const{ body, validationResult } = require("express-validator");
 const { isUser } = require("../middlewares/guards");
 const { parseError } = require("../util");
 const { createMovie, getMovieById, updateMovie, deleteMovie } = require("../services/movie");
@@ -9,16 +10,20 @@ movieRouter.get("/create", isUser, (req, res) => {
     res.render("create", { title: "Create Page" });
 });
 
-movieRouter.post("/create",isUser, async (req, res) => {
+movieRouter.post("/create",isUser, 
+    body('imageURL').trim().isURL().withMessage('Image URL must be a valid URL'),
+    async (req, res) => {
     const creatorId = req.user._id; 
 
     try {
-
-        const movie = await createMovie(creatorId, req.body);
-        res.redirect("/details/" + movie._id);
+        const validation = validationResult(req);
+        if (!validation.errors.length) {
+            throw validation.errors;
+        }
+        const result = await createMovie(creatorId, req.body);
+        res.redirect("/details/" + result._id);
         
     } catch (err) {
-        console.log(err.message);
         res.render("create", { movie: req.body, errors: parseError(err).errors });
     }
 });
