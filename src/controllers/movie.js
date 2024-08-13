@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { isUser } = require("../middlewares/guards");
-
+const { parseError } = require("../util");
 const { createMovie, getMovieById, updateMovie, deleteMovie } = require("../services/movie");
 
 const movieRouter = Router();
@@ -12,24 +12,6 @@ movieRouter.get("/create", isUser, (req, res) => {
 movieRouter.post("/create", isUser, async (req, res) => {
     const creatorId = req.user._id; 
 
-    const errors = {
-        title: !req.body.title,
-        genre: !req.body.genre,
-        director: !req.body.director,
-        year: !req.body.year,
-        imageURL: !req.body.imageURL,
-        rating: !req.body.rating,
-        description: !req.body.description,
-    };
-
-    if (Object.values(errors).includes(true)) {
-        res.render("create", {
-            title: "Create Error Page",
-            errors
-        });
-        return;
-    }
-
     try {
 
         const movie = await createMovie(creatorId, req.body);
@@ -37,8 +19,7 @@ movieRouter.post("/create", isUser, async (req, res) => {
         
     } catch (err) {
         console.log(err.message);
-        res.render("create", { errors: { message: err.message } });
-        return;
+        res.render("create", { movie: req.body, errors: parseError(err).errors });
     }
 });
 
@@ -66,7 +47,7 @@ movieRouter.get("/edit/:id", async (req, res) => {
     res.render("edit", { movie });
 });
 
-movieRouter.post("/edit/:id", async (req, res) => {
+movieRouter.post("/edit/:id", isUser, async (req, res) => {
     const movieId = req.params.id;
     const isCreator = req.user._id;
 
@@ -101,7 +82,7 @@ movieRouter.post("/edit/:id", async (req, res) => {
     res.redirect('/details/' + movieId);
 });
 
-movieRouter.get("/delete/:id", async (req, res) => {
+movieRouter.get("/delete/:id", isUser, async (req, res) => {
     const movieId = req.params.id;
     let movie;
 
@@ -124,7 +105,7 @@ movieRouter.get("/delete/:id", async (req, res) => {
     res.render('delete', { movie });
 });
 
-movieRouter.post("/delete/:id", async (req, res) => {
+movieRouter.post("/delete/:id", isUser, async (req, res) => {
     const movieId = req.params.id;
         const creatorId = req.user._id;
 
