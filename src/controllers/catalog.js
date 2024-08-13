@@ -37,4 +37,16 @@ catalogController.get('/details/:id',  async (req, res) => {
     res.render('details', { movie });
 });
 
+catalogController.get('/404', (req, res) => {
+    res.render('404', {title: 'Page Not Found'});
+});
+
+catalogController.get('*', (req, res) => {
+    res.render('404', {title: 'Page Not Found'});
+});
+
+catalogController.all('*', (req, res) => {
+    res.render('404', {title: 'Page Not Found'});
+});
+
 module.exports = { catalogController };

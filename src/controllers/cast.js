@@ -66,7 +66,7 @@ castRouter.post('/attach/:id', isUser, async (req, res) => {
         const movie = await getMovieById(movieId);
         const allCasts = await getAllCasts();
 
-        res.render('cast-attach',  {movie, allCasts, error: true, title: 'None Cast'});
+        res.render('cast-attach',  { movie, allCasts, error: true, title: 'None Cast'});
 
         return;
     }
