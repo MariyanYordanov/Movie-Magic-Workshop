@@ -36,7 +36,7 @@ movieRouter.post("/create", isUser, async (req, res) => {
         res.redirect("/details/" + movie._id);
         
     } catch (err) {
-
+        console.log(err.message);
         res.render("create", { errors: { message: err.message } });
         return;
     }
